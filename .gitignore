@@ -60,6 +60,7 @@ Temporary Items
 ### Packer ###
 # Cache objects
 packer_cache/
+output-virtualbox-iso/
 
 # For built boxes
 *.box
