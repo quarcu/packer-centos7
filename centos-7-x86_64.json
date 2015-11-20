@@ -68,6 +68,7 @@
             "scripts/yum_update.sh",
             "scripts/vagrant.sh",
             "scripts/vboxguest.sh",
+            "scripts/cleanup.sh",
             "scripts/zerodisk.sh"
         ]
     }]
