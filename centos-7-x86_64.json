@@ -58,10 +58,6 @@
             "keep_input_artifact": false
         },
         {
-            "output": "build/{{.Provider}}-centos-7-x86_64.box",
-            "type": "vagrant"
-        },
-        {
             "type": "atlas",
             "only": ["virtualbox-iso"],
             "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
