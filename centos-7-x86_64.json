@@ -64,7 +64,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "{{isotime \"20060102.HHMM.SS\"}}",
+                "version": "{{isotime \"20060102.1059.44\"}}",
                 "created_at": "{{timestamp}}"
             }
         }]
