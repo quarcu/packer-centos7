@@ -1,12 +1,20 @@
 {
+    "push": {
+      "name": "",
+      "vcs": true
+    },
+    "variables": {
+        "atlas_username": "{{env `ATLAS_USERNAME`}}",
+        "atlas_name": "{{env `ATLAS_NAME`}}"
+    },
     "builders": [{
         "type": "virtualbox-iso",
         "virtualbox_version_file": ".vbox_version",
         "vm_name": "packer-centos-7-x86_64",
-        "headless": "false",
+        "headless": "true",
 
         "guest_os_type": "RedHat_64",
-        "disk_size": "40960",
+        "disk_size": "20480",
 
 
         "iso_url": "http://buildlogs.centos.org/rolling/7/isos/x86_64/CentOS-7-x86_64-Minimal-1510-01.iso",
@@ -24,7 +32,7 @@
         "ssh_username": "vagrant",
         "ssh_password": "vagrant",
         "ssh_port": "22",
-        "ssh_wait_timeout": "50000s",
+        "ssh_wait_timeout": "10000s",
 
         "vboxmanage": [
             ["modifyvm", "{{.Name}}", "--memory", "512"],
@@ -33,10 +41,16 @@
 
         "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p"
     }],
-    "post-processors": [{
-        "output": "build/{{.Provider}}-centos-7-x86_64.box",
-        "type": "vagrant"
-    }],
+    "post-processors": [
+        [{
+            "type": "vagrant",
+            "keep_input_artifact": false
+        },
+        {
+            "output": "build/{{.Provider}}-centos-7-x86_64.box",
+            "type": "vagrant"
+        }]
+    ],
     "provisioners": [{
         "type": "shell",
         "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
@@ -44,7 +58,7 @@
             "scripts/yum_update.sh",
             "scripts/vagrant.sh",
             "scripts/vboxguest.sh",
-            "scripts/compact.sh"
+            "scripts/zerodisk.sh"
         ]
     }]
 }
